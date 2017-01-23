@@ -1,19 +1,20 @@
 {
-  "name": "hrportal",
-  "version": "0.0.0",
-  "private": true,
+  "name": "backend-gojira",
+  "version": "1.0.0",
+  "description": "Creating backend for the Gojira HR Portal",
+  "main": "config.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon  server.js"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.4.7",
-    "body-parser": "~1.15.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0",
-    "express": "~4.14.0",
-    "jade": "~1.11.0",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.7.7",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "morgan": "^1.7.0",
+    "mpromise": "^0.5.5"
   }
 }
