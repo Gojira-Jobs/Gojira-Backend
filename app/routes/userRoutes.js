@@ -3,9 +3,9 @@ var jwt = require('jsonwebtoken');
 var bodyParser =require('body-parser');
 var secretKey=require('../../config').secret;
 var router=express.Router();
+
+
 let userPromises=require('../promises/userPromises');
-//app.use(bodyParser.urlencoded({extended:false}));
-//app.use(bodyParser.json());
 router.post('/authenticate',(req,res)=>{
     let user=userPromises.searchForUser(req.body.email);
     user.then((user)=>{
@@ -15,7 +15,7 @@ router.post('/authenticate',(req,res)=>{
             console.log("Entered",secretKey);
             var token=jwt.sign({email:user.email,password:user.password},secretKey,{ expiresIn:"10h"});
             console.log("token:",token);
-            res.json({ success:true,message:"Enjoy your token",token:token});
+            res.json({ success:true,message:"Enjoy your token",data:{username:user.name,token:token,email:user.email}});
         }
     });
 });
@@ -28,7 +28,6 @@ router.use((req,res,next)=>{
                     return res.json({success:false,msg:"Failed to access "})
                 }
                 else{
-                    console.log("Sooooooooooooo",decoded)
                     req.decoded=decoded;
                     next();
                 }
@@ -47,6 +46,16 @@ router.route('/users')
        }).catch((err)=>{
            res.end("Can't Serve Anything..");
        })
+});
+router.route('/user')
+.get((req,res,next)=>{
+    let user=userPromises.searchForUser(req.decoded.email);
+    user.then((user)=>{
+        if(!user) res.json({success:false,data:null,msg:"Not found Any DAta"});
+        else{
+            res.json({success:true,data:user,msg:"User data send"});
+        }
+    })
 });
 
 
