@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 let hrSchema=new Schema({
-    
-    _id:{type:String,required:true,unique:true},
+    email:{type:String,required:true,unique:true},
     name:{type:String,required:true},
-    password:{type:String,required:true}
-});
+    password:{type:String,required:true},
+    token: {type: String, default:'No'}
+},{versionKey:false});
 
 let postSchema = new Schema({
-    _id:{type:String,
+    job_id:{type:String,
         trim:true,
         required:true,
         unique:true
@@ -30,9 +30,11 @@ let postSchema = new Schema({
         type:Date,
         required:true
     },
-    Joining:{type:Date,default:"Not Mentioned.."},
+    Joining:{type:Date},
     WorkPlace:{type:String,default:"Not decided"},
-    postedBy:{type:String,ref:'admin'}
+    postedBy:{type:Schema.Types.ObjectId,ref:'admin'}
 });
-exports.hrSchema=mongoose.model('admin',hrSchema);
-exports.postSchema=mongoose.model('post',postSchema);
+module.exports={
+    hrSchema:mongoose.model('admin_tables',hrSchema),
+    postSchema:mongoose.model('post',postSchema)
+};
