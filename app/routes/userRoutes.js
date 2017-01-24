@@ -3,8 +3,6 @@ var jwt = require('jsonwebtoken');
 var bodyParser =require('body-parser');
 var secretKey=require('../../config').secret;
 var router=express.Router();
-
-
 let userPromises=require('../promises/userPromises');
 router.post('/authenticate',(req,res)=>{
     let user=userPromises.searchForUser(req.body.email);

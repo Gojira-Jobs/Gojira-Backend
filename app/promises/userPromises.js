@@ -5,6 +5,7 @@ exports.searchForUser=(mailId)=>{
             if(err) reject("Error during quering");
             else resolve(user);
         })
+       
     })
 }
 exports.getUsers=()=>{
