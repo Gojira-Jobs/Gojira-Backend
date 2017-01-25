@@ -34,15 +34,16 @@ module.exports={
                 
                 let postData={job_id:data.job_id,category:data.category,
                     title:data.title,description:data.description,
-                    AgeLimit:data.AgeLimit,WorkDetails:data.WorkDetails,
-                EduDetails:data.EduDetails,last_date:new Date(data.last_date),WorkPlace:data.WorkPlace,postedBy:doc._id};
+                    AgeLimit:data.AgeLimit,WorkExp:data.WorkExp,
+                EduDetails:data.EduDetails,last_date:data.last_date,Joining:data.Joining,
+                WorkPlace:data.WorkPlace,postedBy:doc._id};
                 postTable.create(postData,(err,doc)=>{
                     if(err){
                         console.log(err)
                         reject(err);}
                     else{
                         console.log("User Created");
-                        resolve("User Created..");
+                        resolve("Job posted");
                     }  
                 })
             }

@@ -49,9 +49,10 @@ app.get('/setup',(req,res,next)=>{
             res.end("Failed..")
     })
 
-    //res.end("Hii Ajit ..");
+    
 })
-app.use('/api',UserRouter);
 app.use('/api',PostRouter);
+app.use('/api',UserRouter);
+
 app.listen(port);
 console.log("Server is Running...");
