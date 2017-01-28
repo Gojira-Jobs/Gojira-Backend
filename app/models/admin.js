@@ -4,7 +4,8 @@ let hrSchema=new Schema({
     email:{type:String,required:true,unique:true},
     name:{type:String,required:true},
     password:{type:String,required:true},
-    token: {type: String, default:'No'}
+    token: {type: String, default:'No'},
+    otp: {type: String, default: 'No'}
 },{versionKey:false});
 
 let postSchema = new Schema({
@@ -34,7 +35,7 @@ let postSchema = new Schema({
     WorkPlace:{type:String,default:"Not decided"},
     postedBy:{type:Schema.Types.ObjectId,ref:'admin'}
 });
-module.exports={
+module.exports = {
     hrSchema:mongoose.model('admin_tables',hrSchema),
     postSchema:mongoose.model('post',postSchema)
 };
