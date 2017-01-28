@@ -8,29 +8,7 @@ var nodemailer = require('@nodemailer/pro');
 let userPromises=require('../promises/userPromises');
 router.post('/register',(req,res)=>{
     var data=req.body;
-    // console.log(data.email)
-
-    // let transporter=nodemailer.createTransport({
-    //     service:"gmail",
-    //     auth:{
-    //         user:"jainajit194@gmail.com",
-    //         pass:"ajikheart"
-    //     }
-    // });
-    // let mailOptions={
-    //     from:"@noreplyajit@gmail.com",
-    //     to:data.email,
-    //     subject:"Hii Guys",
-    //     text:"This is mail from ajit",
-    //     html:"<h1>My first mail attempt</h1>"
-    // };
-    // transporter.sendMail(mailOptions,(err,info)=>{
-    //     if(err) {
-    //         console.log(err)
-    //         res.json(err)
-    //     }
-    //     res.json(info);
-    // })
+    
     data.token=jwt.sign({email:data.email,password:data.password},secretKey,{ expiresIn:"10h"});
     console.log(data);
     var user=userPromises.addUser(data);
