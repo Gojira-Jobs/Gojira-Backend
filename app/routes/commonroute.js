@@ -12,11 +12,11 @@ router.post('/',function(req,res){
     } 
     else{
         console.log('Headers Found');
-        let headerdata = req.headers.setdata.split(':');
+        let headerdata = req.headers.authheader.split(':');
         let uid = headerdata[0];
         let pas = headerdata[1];
-        if(uid === 'hrportal' && pas == '1234bprrsa'){
-            let username = req.body.username.toLowerCase();
+        if(uid === 'hrportallogin' && pas == '12345@bprrsa'){
+            let username = req.body.email.toLowerCase();
             let password = req.body.password;
             let usertype = req.body.isHr;
             console.log(username,password,usertype);
@@ -31,6 +31,7 @@ router.post('/',function(req,res){
                     token: resolve.tokenid,
                     name: resolve.name,
                     email: resolve.email,
+                    gender: resolve.gender,
                     ishr: true
                    };
                     res.status(200).send({'status':1,'data':senddata});
@@ -55,6 +56,8 @@ router.post('/',function(req,res){
                       token: resolve.tokenid,
                       name: resolve.name,
                       email: resolve.email,
+                      phonenumber: resolve.phonenumber,
+                      gender: resolve.gender,
                       ishr: false
                      };
                      res.status(200).send({'status':1,'data':senddata});

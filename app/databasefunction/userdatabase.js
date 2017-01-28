@@ -1,6 +1,28 @@
-var User = require('../models/demouser.js');
+var User = require('../models/user.js');
 
 module.exports = {
+
+    phonenumberfind: (obj)=> {
+        return new Promise((resolve,reject)=> {
+            console.log('In User-> Find PhoneNumber');
+            User.findOne({'PhoneNumber': obj.Phonenumber},(err,data)=> {
+                console.log('Data: ', data);
+                if(err) reject(err);
+                else resolve(data);
+            });
+        });
+    },
+
+    otpfindupdate: (obj)=>{
+        return new Promise((resolve,reject)=> {
+            console.log('In User-> Otp find and update');
+            User.findOneAndUpdate(obj,{$set:{'otp':'0'}},(err,data)=> {
+                console.log('Data: ',data);
+                if(err) reject(err);
+                else resolve(data);
+            });
+        });
+    },
 
     emailfind: (obj)=>{
         return new Promise((resolve,reject)=> {

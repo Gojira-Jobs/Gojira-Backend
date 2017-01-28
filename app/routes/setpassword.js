@@ -13,7 +13,7 @@ router.post('/set',function(req,res){
 		console.log('ok');
 		let headerinfo = req.headers.authheader;
 		headerinfo = headerinfo.split('--');
-		if(headerinfo[0] == 'hrportalforget' && headerinfo[1] == '12345@bprras') {
+		if(headerinfo[0] == 'hrportalforget' && headerinfo[1] == '12345@bprrsa') {
 			console.log('Header Ok');
 			let obj = {
 				'email': req.body.email.toLowerCase(),
@@ -24,7 +24,7 @@ router.post('/set',function(req,res){
 				'name':'',
 				'ok':0
 			};
-			if(obj.isHr == 1){
+			if(obj.isHr == true){
 				setfun.adminset(obj).then((resolve)=>{
 					if(resolve.ok == 1) res.status(200).send({'status':1,'data':resolve});
 					else res.status(404).send({'status':0,'data':'User Not Found'});

@@ -16,8 +16,8 @@ router.post('/',function(req,res){
     	let headerdata = req.headers.setdata.split(':');
         let uid = headerdata[0];
         let pas = headerdata[1];
-        if(uid === 'hrportalsuper' && pas === '1234bprrsa'){
-        	let username = req.body.username.toLowerCase();
+        if(uid === 'hrportalsuper' && pas === '12345@bprrsa'){
+        	let username = req.body.email.toLowerCase();
             let password = req.body.password;
             console.log(username,password);
             logfunction.superlogin(username,password).then((resolve)=>{

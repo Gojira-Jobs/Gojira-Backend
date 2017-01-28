@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var bodyparser = require('body-parser');
-var changepassword = require('../changepassword/changepassword.js');
 var otpsend = require('../supported/otpsend.js');
 
 router.use(bodyparser());

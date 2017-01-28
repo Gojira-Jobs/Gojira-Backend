@@ -6,7 +6,9 @@ var user = new schema({
     password:{type: String, required:true},
     name: {type:String, required:true, trim:true},
     token:{type: String, default:'No'},
-    otp: {type: String, default: 'No'}
+    otp: {type: String, default: '0'},
+    gender: {type: String, required: true, trim: true},
+    phonenumber: {type: String, required: true, trim: true}
 });
 
 module.exports = mongoose.model('user_tables',user);

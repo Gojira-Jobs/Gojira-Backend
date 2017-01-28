@@ -12,7 +12,7 @@ router.post('/change',function(req,res){
 	else if(req.body.newpassword == null || req.body.newpassword == "") res.status(400).send({'status':0,'data':'provide new password'});
 	else {
 		let obj = {
-			'email':req.headers.username.toLowerCase(),
+			'email':req.headers.email.toLowerCase(),
 			'oldpass': req.body.oldpassword,
 			'newpass':req.body.newpassword
 		};
@@ -26,7 +26,7 @@ router.post('/change',function(req,res){
 router.post('/signout',function(req,res){
     console.log('In Signout');
     let obj = {
-        'email': req.headers.username.toLowerCase()
+        'email': req.headers.email.toLowerCase()
     };
 
     databasefunction.signout(obj).then((resolve)=>{

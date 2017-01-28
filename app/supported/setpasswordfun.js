@@ -18,6 +18,7 @@ module.exports = {
 					obj.name = resolve.name;
 					obj.otp = 0,
 					obj.password = '',
+					obj.gender = resolve.gender,
 					console.log(obj);
 					ok(obj);
 				}
@@ -43,6 +44,8 @@ module.exports = {
 					obj.name = resolve.name;
 					obj.otp = 0,
 					obj.password = '',
+					obj.phonenumber = resolve.phonenumber,
+					obj.gender = resolve.gender,
 					console.log(obj);
 					ok(obj);	
 				}

@@ -17,12 +17,13 @@ router.post('/admin-insert',function(req,res){
             console.log('Email Done');
                     databasefunction.adminemailcheck(req.body.email).then((resolve)=>{
                         console.log('Check Email');
-                        if(resolve === null || resolve.length <= 0){
+                        if(resolve === null ){
                             console.log('Unique Email');
                             let obj = {
                                 'email': req.body.email.toLowerCase(),
                                 'password' : req.body.password,
                                 'name' : req.body.name,
+                                'gender': req.body.gender,
                                 'token' : 'No',
                                 'otp' : 'No'
                             };
@@ -97,7 +98,7 @@ router.post('/change',function(req,res){
 	else if(req.body.newpassword == null || req.body.newpassword == "") res.status(400).send({'status':0,'data':'provide new password'});
 	else {
 		let obj = {
-			'username':req.headers.username.toLowerCase(),
+			'username':req.headers.email.toLowerCase(),
 			'oldpass': req.body.oldpassword,
 			'newpass':req.body.newpassword
 		};
@@ -112,9 +113,8 @@ router.post('/change',function(req,res){
 router.post('/signout',function(req,res){
     console.log('In Signout');
     let obj = {
-        'username': req.headers.username.toLowerCase()
+        'username': req.headers.email.toLowerCase()
     };
-
     databasefunction.signout(obj).then((resolve)=>{
         if(resolve === null) res.status(404).send({'status':0,'data':'User not found'});
         else res.status(200).send({'status':1, 'data':'Successfully signout'});

@@ -27,6 +27,7 @@ module.exports = {
                                 tokenid: token,
                                 name: resolv.name,
                                 email: resolv.email,
+                                gender: resol.gender,
                         };
                         console.log('From Login send data: '+ senddata);
                         resol (senddata);
@@ -66,6 +67,8 @@ module.exports = {
                                 tokenid: token,
                                 name: resolv.name,
                                 email: resolv.email,
+                                phonenumber: resolv.phonenumber,
+                                gender: resolv.gender,
                                 hr : false
                         };
                         resol (senddata);
