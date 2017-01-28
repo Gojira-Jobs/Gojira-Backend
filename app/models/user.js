@@ -43,6 +43,9 @@ let userSchema = new Schema({
         pincode : {type:Number,
             default:0
             }
+    },
+    token :{
+        type: String
     }
 })
 userSchema.virtual('userData').get(()=>{

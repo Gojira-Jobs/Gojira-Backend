@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var postTable=require('../models/posted').postSchema;
-var hrTable=require('../models/posted').hrSchema;
+var postTable=require('../models/admin').postSchema;
+var hrTable=require('../models/admin').hrSchema;
 function searchForAdmin(mailId){
     return new Promise((resolve,reject)=>{
         hrTable.findOne({email:mailId},{_id:1},(err,doc)=>{

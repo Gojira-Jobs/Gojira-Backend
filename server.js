@@ -10,9 +10,17 @@ var User = require('./app/models/user');
 var UserRouter = require('./app/routes/userRoutes');
 var PostRouter = require('./app/routes/postRouter');
 var userPromises = require('./app/promises/userPromises');
-var Hr=require('./app/models/posted').hrSchema;
-var port = process.env.PORT || 8000;
-mongoose.connect('mongodb://localhost:27017/MyPortal');
+var Hr=require('./app/models/admin').hrSchema;
+var commonlogin = require('./app/routes/commonroute');
+var superlogin = require('./app/routes/superlogin');
+var auth_user_route = require('./app/routes/userroute');//user route
+var auth_admin_route = require('./app/routes/adminroute');// admin route
+var auth_super_route = require('./app/routes/superroute');// super user route
+var user_regis = require('./app/routes/userregistration');
+var forgetpassword = require('./app/routes/passwordchange');
+var forgetpassset= require('./app/routes/setpassword');
+//var port = process.env.PORT || 8000;
+mongoose.connect(config.url);
 var db = mongoose.connection;
 mongoose.set('debug', true);
 db.on('error',console.error.bind(console,'Connection Error:'));
@@ -51,8 +59,22 @@ app.get('/setup',(req,res,next)=>{
 
     
 })
+<<<<<<< HEAD
+//app.use('/api',UserRouter);
+app.use('/api',PostRouter);
+app.use('/api/authenticate/login',commonlogin);
+app.use('/api/super/login',superlogin);
+app.use('/api/user/auth',auth_user_route);
+app.use('/api/admin/auth',auth_admin_route);
+app.use('/api/super/auth',auth_super_route);
+app.use('/api/user/registration',user_regis);
+app.use('/api/forget/reset',forgetpassword);
+app.use('/api/forget/passwordset',forgetpassset);
+app.listen(3000);
+=======
 app.use('/api',PostRouter);
 app.use('/api',UserRouter);
 
 app.listen(port);
+>>>>>>> a56b9de2126aab6be969c721a0315c47f4b04f0b
 console.log("Server is Running...");
