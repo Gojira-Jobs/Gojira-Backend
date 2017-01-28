@@ -14,8 +14,10 @@ let userSchema = new Schema({
             trim:true},
     mobile : { type:String,
                 default:"900000000",
-                unique:true,trim:true
+                trim:true
             },
+    token:{type:String,
+            required:true},
     high_qual : { type:String,
                 default:"MCA",trim:true},
     high_qual_perc :{ type:Number,

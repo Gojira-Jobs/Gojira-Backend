@@ -50,15 +50,16 @@ function addInitial(obj){
 }
 app.get('/setup',(req,res,next)=>{
     
-   addInitial({name:"Ajit jain",email:"ajit.x@venturepact.com",password:"ajitjain"}).then((docs)=>{
+   addInitial({name:"Ajit jain",email:"jainajit194@gmail.com",password:"ajitjain"}).then((docs)=>{
            res.json(docs);
     }).catch((err)=>{
             console.log(err);
             res.end("Failed..")
     })
 
-    //res.end("Hii Ajit ..");
+    
 })
+<<<<<<< HEAD
 //app.use('/api',UserRouter);
 app.use('/api',PostRouter);
 app.use('/api/authenticate/login',commonlogin);
@@ -70,4 +71,10 @@ app.use('/api/user/registration',user_regis);
 app.use('/api/forget/reset',forgetpassword);
 app.use('/api/forget/passwordset',forgetpassset);
 app.listen(3000);
+=======
+app.use('/api',PostRouter);
+app.use('/api',UserRouter);
+
+app.listen(port);
+>>>>>>> a56b9de2126aab6be969c721a0315c47f4b04f0b
 console.log("Server is Running...");
