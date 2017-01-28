@@ -12,7 +12,7 @@ module.exports = {
                 'password':password
              };
             admin.adminlogin(obj).then((resolve)=>{
-                if(resolve == null){
+                if(resolve == null || resolve.length <= 0){
                     console.log('Data Not Found');
                     resol  ({ok:2});
                 }
@@ -20,7 +20,7 @@ module.exports = {
                     console.log('Admin Found now wait for token');
                     let token = gettoken(obj.email);
                     console.log('Token is: ',token);
-                    admin.admintokenupdate({'email':username,'token':token}).then((resolv)=>{
+                    admin.admintokenupdate({'email':obj.email,'token':token}).then((resolv)=>{
                         console.log('Update Result: '+ resolv);
                         let senddata = {
                                 ok:1,
@@ -32,7 +32,7 @@ module.exports = {
                         console.log('From Login send data: '+ senddata);
                         resol (senddata);
                     }).catch((reject)=>{
-                        console.log('Reject due to update token');
+                        console.log('Reject due to update token:', reject);
                         rej( {ok:3} );
                     })
              }
@@ -52,7 +52,7 @@ module.exports = {
              };
             user.userlogin(obj).then((resolve)=>{
                 console.log('Resolve:', resolve);
-                if(resolve == null ){
+                if(resolve == null || resolve.length <= 0){
                     console.log('User Data Not Found');
                     resol  ({ok:2});
                 }
@@ -94,7 +94,7 @@ module.exports = {
              };
             superuser.superlogin(obj).then((resolve)=>{
                 console.log('Resolve:', resolve);
-                if(resolve == null ){
+                if(resolve == null || resolve.length <= 0){
                     console.log('User Data Not Found');
                     resol  ({ok:2});
                 }

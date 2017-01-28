@@ -17,10 +17,6 @@ var auth_user_route = require('./app/routes/userroute');//user route
 var auth_admin_route = require('./app/routes/adminroute');// admin route
 var auth_super_route = require('./app/routes/superroute');// super user route
 var user_regis = require('./app/routes/userregistration');// user registration route
-var forgetpassword = require('./app/routes/passwordchange');// forgetpassword otp generate route
-var forgetpassset= require('./app/routes/setpassword');// forgetpassword set route
-var userdetails = require('./app/routes/userdetails');// after registration otp verify and detial retrive route
-//var port = process.env.PORT || 8000;
 mongoose.connect(config.url);
 var db = mongoose.connection;
 mongoose.set('debug', true);
@@ -63,14 +59,11 @@ app.get('/setup',(req,res,next)=>{
 
 //app.use('/api',UserRouter);
 app.use('/api/post',PostRouter);
-app.use('/api/authenticate/login',commonlogin);
+app.use('/api/authenticate',commonlogin);
 app.use('/api/super/login',superlogin);
 app.use('/api/user/auth',auth_user_route);
 app.use('/api/admin/auth',auth_admin_route);
 app.use('/api/super/auth',auth_super_route);
-app.use('/api/user/registration',user_regis);
-app.use('/api/forget/reset',forgetpassword);
-app.use('/api/forget/passwordset',forgetpassset);
-app.use('/api/details/user',userdetails);
-app.listen(3000);
+app.use('/api/register',user_regis);
+app.listen(8000);
 console.log("Server is Running...");
