@@ -23,6 +23,22 @@ module.exports={
             })
        });
     }),
+    getPostedJobs:(mailId)=>{
+        return new Promise((resolve,reject)=>{
+                var HrFinder=searchForAdmin(mailId);
+                HrFinder.then((doc)=>{
+                    if(!doc) reject(doc);
+                    else{
+                        postTable.find({postedBy:doc._id},{postedBy:0,_v:0},(err,docs)=>{
+                            if(err) reject(err);
+                            else resolve(docs);
+                        })
+                    }
+                }).catch((err)=>{
+                    reject(err);
+                })
+        })
+    },
     addPost:(function(data){
        return new Promise((resolve,reject)=>{
            let HrFinder=searchForAdmin(data.postedBy);

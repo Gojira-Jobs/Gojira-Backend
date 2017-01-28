@@ -42,7 +42,7 @@ function addInitial(obj){
 }
 app.get('/setup',(req,res,next)=>{
     
-   addInitial({name:"Ajit jain",email:"ajit.x@venturepact.com",password:"ajitjain"}).then((docs)=>{
+   addInitial({name:"Ajit jain",email:"jainajit194@gmail.com",password:"ajitjain"}).then((docs)=>{
            res.json(docs);
     }).catch((err)=>{
             console.log(err);

@@ -24,4 +24,19 @@ router.route('/joblisting')
         res.status(errors.INTERNAL.code).json({error:errors.INTERNAL.msg});
     })
 })
+router.route('/hr/postedJobs')
+.get((req,res,next)=>{
+    
+    var getPostedJobs = postPromises.getPostedJobs(req.query.email);
+
+    getPostedJobs.then((docs)=>{
+        res.status(errors.ACCEPTED.code).json({docs:docs});
+    }).catch((err)=>{
+        if(err===null || err === 'undefined')
+            res.status(errors.ACCEPTED.code).json({msg:"User Not Posted anything"});
+        else
+            res.status(errors.INTERNAL.code).json({msg:errors.INTERNAL.msg});
+    });
+})
+
  module.exports=router;
