@@ -12,7 +12,7 @@ router.post('/signout',function(req,res){
         'email': req.body.email.toLowerCase()
     };
     databasefunction.signout(obj).then((resolve)=>{
-        if(resolve == null ) res.status(404).send({'status':0,'err':'User not found'});
+        if(resolve == null || resolve.length <= 0) res.status(404).send({'status':0,'err':'User not found'});
         else res.status(200).send({'status':1, 'data':'Successfully signout'});
     }).catch((reject)=>{
         console.log('Signout Error: ', reject);

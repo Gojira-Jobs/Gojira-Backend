@@ -43,7 +43,7 @@ router.post('/',function(req,res){
 								res.status(200).send({'status':1,'data': senddata});
 							}).catch((err)=> {
 								console.log('Error due to mail transfer: ', err);
-								res.status(500).send({'status':0,'err':{'data':'Internal Server Error!'}});
+								res.status(500).send({'status':0,'err':'Internal Server Error!'});
 							})
 						}).catch((reje)=> {
 							console.log('error in insertion: ',reje);
