@@ -49,6 +49,7 @@ module.exports = {
     userlogin: (obj)=> {
         return new Promise((resolve,reject)=> {
             console.log('In User-> To Login');
+            
             User.findOne(obj,(err,data)=> {
                 console.log('In User-> Data Find: '+ data);
                 if(err) reject(err);

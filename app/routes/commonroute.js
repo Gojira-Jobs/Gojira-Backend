@@ -17,8 +17,14 @@ router.post('/',function(req,res){
             if(resolve.ok === 1){
                 console.log('Login Successfully Done..');
                 console.log('Resolve Token'+ resolve.tokenid);
-                
-                res.status(200).send({'status':1,'data':resolve});
+                let senddata = {
+                    token: resolve.tokenid,
+                    name: resolve.name,
+                    email: resolve.email,
+                    gender: resolve.gender,
+                    ishr: true
+                };
+                res.status(200).send({'status':1,'data':senddata});
             }
             else {
                 console.log('Userid or Password not match');
