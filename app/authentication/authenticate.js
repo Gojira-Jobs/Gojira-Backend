@@ -7,7 +7,7 @@ exports.superauth = (req,res,next)=> {
     else if(req.headers.token === "No") res.status(401).send({'status': 0,'err':'unauthorized user'});
     else {
          var token = req.headers.token;
-         var userid = req.body.email.toLowerCase();
+         var userid = req.body.email;
          console.log('Token and Username: '+ token,userid);
          let obj ={
             'username' : userid,
@@ -32,7 +32,7 @@ exports.admin = (req,res,next)=>{
     if(!req.headers.token)  res.status(401).send({'status':false,'err':'unauthorized user'});
     else {
          var token = req.headers.token;
-         var userid = req.body.email.toLowerCase();
+         var userid = req.body.email;
          console.log('Token and Username: '+ token,userid);
          admin.admintokenfind({'email': userid, 'token': token}).then((resolve)=>{
              if(resolve == null || resolve.length <= 0) res.status(401).send({'success':false,'msg':'unauthorized user'});
