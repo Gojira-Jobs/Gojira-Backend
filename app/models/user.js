@@ -16,8 +16,7 @@ let userSchema = new Schema({
                 default:"900000000",
                 trim:true
             },
-    token:{type:String,
-            required:true},
+    token:{type:String},
     high_qual : { type:String,
                 default:"MCA",trim:true},
     high_qual_perc :{ type:Number,
@@ -44,9 +43,8 @@ let userSchema = new Schema({
             default:0
             }
     },
-    token :{
-        type: String
-    }
+    
+  
 })
 /*userSchema.virtual('userData').get(()=>{
     let st=this.name+" "+this.mobile+" "+this.email+" "+this.address.street;

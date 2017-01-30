@@ -47,7 +47,7 @@ module.exports = {
             return new Promise((resol,rej)=>{
             console.log('User Promise Enter');
              let obj ={
-                'email':username.toLowerCase(),
+                'email':username,
                 'password':password
              };
             user.userlogin(obj).then((resolve)=>{
@@ -57,6 +57,7 @@ module.exports = {
                     resol  ({ok:2});
                 }
                else {
+
                     console.log('User Fond now wait for token');
                     let token = gettoken(obj.email);
                     console.log('Token is: ',token);
@@ -67,9 +68,7 @@ module.exports = {
                                 tokenid: token,
                                 name: resolv.name,
                                 email: resolv.email,
-                                phonenumber: resolv.phonenumber,
-                                gender: resolv.gender,
-                                hr : false
+                                gender: resol.gender,
                         };
                         resol (senddata);
                     }).catch((reject)=>{

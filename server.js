@@ -47,7 +47,7 @@ function addInitial(obj){
 }
 app.get('/setup',(req,res,next)=>{
     
-   addInitial({name:"Ajit jain",email:"jainajit194@gmail.com",password:"ajitjain"}).then((docs)=>{
+   addInitial({name:"Ajit jain",email:"jainajit194@gmail.com",password:"ajitjain",gender:"Male"}).then((docs)=>{
            res.json(docs);
     }).catch((err)=>{
             console.log(err);
@@ -56,14 +56,14 @@ app.get('/setup',(req,res,next)=>{
 
     
 })
-
-//app.use('/api',UserRouter);
-app.use('/api/post',PostRouter);
+app.use('/api',PostRouter);
+app.use('/api/register',user_regis);
 app.use('/api/authenticate',commonlogin);
+app.use('/api',UserRouter);
 app.use('/api/super/login',superlogin);
 app.use('/api/user/auth',auth_user_route);
 app.use('/api/admin/auth',auth_admin_route);
 app.use('/api/super/auth',auth_super_route);
-app.use('/api/register',user_regis);
+
 app.listen(8000);
 console.log("Server is Running...");

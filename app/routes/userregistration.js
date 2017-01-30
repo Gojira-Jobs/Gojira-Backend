@@ -12,12 +12,7 @@ router.post('/',function(req,res){
 	console.log('In User Registration-->');
 	if(!req.body) res.satus(401).send({'status': 0, 'data': 'Unauthorized User'});
 	else{
-			let obj = {
-				'email' : req.body.email,
-				'password' : req.body.password,
-				'name' : req.body.name.toUpperCase(),
-				'token' : 'No',
-			};
+			let obj = req.body;
 			console.log('Coming Data: ', obj);
 			emailcheck.check(obj.email).then((resolve)=>{
 				console.log('Email is valid');

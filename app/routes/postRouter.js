@@ -4,7 +4,7 @@ var postPromises=require('../promises/postPromises');
 let errors = require("../config");
 var authenticate = require('../authentication/authenticate.js');
 
-router.use(authenticate.admin);
+//router.use(authenticate.admin);
 
 router.route('/joblisting')
 .post((req,res,next)=>{

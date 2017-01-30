@@ -11,10 +11,25 @@ module.exports={
     }),
     getUsers:(()=>{
         return new Promise((resolve,reject)=>{
-            let project={_id:0,name:1,email:1,mobile:1,password:1}
+            let project={_id:0,password:0,_v:0}
             User.find({},project,(err,docs)=>{
                 if(err) reject(err);
                 else resolve(docs);
+            })
+        })
+    }),
+     setData:((obj)=>{
+        return new Promise((resolve,reject)=>{
+        User.update({email:obj.email},{$set:obj},(err,doc)=>{
+                if(err){
+                    console.log(err);
+                    reject(err);
+                } 
+                else{
+                    console.log(doc);
+                    resolve(doc);
+                }
+
             })
         })
     }),

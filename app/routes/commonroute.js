@@ -6,7 +6,7 @@ var logfunction = require('../loginfunction/login.js');
 router.use(bodyparser());
 
 router.post('/',function(req,res){
-    let username = req.body.email.toLowerCase();
+    let username = req.body.email;
     let password = req.body.password;
     let usertype = req.body.isHr;
     console.log(username,password,usertype);
@@ -17,14 +17,8 @@ router.post('/',function(req,res){
             if(resolve.ok === 1){
                 console.log('Login Successfully Done..');
                 console.log('Resolve Token'+ resolve.tokenid);
-                let senddata = {
-                    token: resolve.tokenid,
-                    name: resolve.name,
-                    email: resolve.email,
-                    gender: resolve.gender,
-                    ishr: true
-                };
-                res.status(200).send({'status':1,'data':senddata});
+                
+                res.status(200).send({'status':1,'data':resolve});
             }
             else {
                 console.log('Userid or Password not match');
@@ -42,14 +36,13 @@ router.post('/',function(req,res){
                 if(resolve.ok === 1){
                     console.log('Login Successfully Done..');
                     console.log('Resolve Token'+ resolve.tokenid);
-                    let senddata = {
-                      token: resolve.tokenid,
-                      name: resolve.name,
-                      email: resolve.email,
-                      phonenumber: resolve.phonenumber,
-                      gender: resolve.gender,
-                      ishr: false
-                    };
+                let senddata = {
+                    token: resolve.tokenid,
+                    name: resolve.name,
+                    email: resolve.email,
+                    gender: resolve.gender,
+                    ishr: true
+                };
                     res.status(200).send({'status':1,'data':senddata});
                 }
                 else {
