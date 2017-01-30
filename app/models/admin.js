@@ -5,7 +5,8 @@ let hrSchema=new Schema({
     name:{type:String,required:true},
     password:{type:String,required:true},
     token: {type: String, default:'No'},
-    otp: {type: String, default: 'No'}
+    otp: {type: String, default: 'No'},
+    gender: {type: String, required: true, trim: true}
 },{versionKey:false});
 
 let postSchema = new Schema({

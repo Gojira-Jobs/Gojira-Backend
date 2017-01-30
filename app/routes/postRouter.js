@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var postPromises=require('../promises/postPromises');
 let errors = require("../config");
+var authenticate = require('../authentication/authenticate.js');
+
+router.use(authenticate.admin);
+
 router.route('/joblisting')
 .post((req,res,next)=>{
     var postCreated=postPromises.addPost(req.body);

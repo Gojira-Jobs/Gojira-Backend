@@ -19,42 +19,8 @@ router.post('/register',(req,res)=>{
         console.log(err);
         res.status(errors.INTERNAL.code).json({msg:"Registration Failed..."});
     });
-})
-router.post('/authenticate',(req,res)=>{
-    let user=userPromises.searchForUser(req.body.email);
-    user.then((user)=>{
-        if(!user) res.status(errors.NOTFOUND.code).json({msg:"User "+errors.NOTFOUND.msg});
-        else if(user && user.password!=req.body.password)
-         res.status(errors.UNAUTHORIZED.code).json({msg:"password doesn't match"});
-        else{
-            console.log("Entered",secretKey);
-
-            var token=jwt.sign({email:user.email,password:user.password},secretKey,{ expiresIn:"10h"});
-            console.log("token:",token);
-            res.status(errors.ACCEPTED.code).json({msg:errors.ACCEPTED.code,data:{username:user.name,token:token,email:user.email}});
-        }
-    });
 });
-router.use((req,res,next)=>{
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    console.log(token);
-    if(token){
-            jwt.verify(token,secretKey,(err,decoded)=>{
-                if(err){
-                    console.log(err);
-                    return res.status(errors.UNAUTHORIZED.code).json({msg:errors.UNAUTHORIZED.msg})
-                }
-                else{
-                    req.decoded=decoded;
-                    next();
-                }
-            })
 
-    }
-    else{
-        res.status(403).json({success:false,msg:"Token not found.."});
-    }
-})
 router.route('/users')
 .get((req,res,next)=>{
         let getData = userPromises.getUsers();

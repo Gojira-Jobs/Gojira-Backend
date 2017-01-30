@@ -12,7 +12,7 @@ let userSchema = new Schema({
     password : { type:String,
                 required:true,
             trim:true},
-    mobile : { type:String,
+    phonenumber : { type:String,
                 default:"900000000",
                 trim:true
             },
@@ -48,8 +48,8 @@ let userSchema = new Schema({
         type: String
     }
 })
-userSchema.virtual('userData').get(()=>{
+/*userSchema.virtual('userData').get(()=>{
     let st=this.name+" "+this.mobile+" "+this.email+" "+this.address.street;
     return st;
-})
+})*/
 module.exports=mongoose.model('users',userSchema);
