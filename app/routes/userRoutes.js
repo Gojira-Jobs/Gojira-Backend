@@ -8,7 +8,7 @@ var nodemailer = require('@nodemailer/pro');
 let userPromises=require('../promises/userPromises');
 router.post('/register',(req,res)=>{
     var data=req.body;
-    
+  
     data.token=jwt.sign({email:data.email,password:data.password},secretKey,{ expiresIn:"10h"});
     console.log(data);
     var user=userPromises.addUser(data);
