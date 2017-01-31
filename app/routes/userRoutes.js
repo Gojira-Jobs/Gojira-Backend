@@ -62,7 +62,7 @@ router.route('/user')
         console.log(req.body);
         var updateData=userPromises.setData(req.body);
         updateData.then((data)=>{
-            res.status(errors.ACCEPTED.code).json({msg:"Updation Completed"});
+            res.status(errors.ACCEPTED.code).json({msg:"Updation Completed",data:data});
         }).catch((err)=>{
             res.status(errors.INTERNAL.code).json({msg:errors.INTERNAL.msg})
         });

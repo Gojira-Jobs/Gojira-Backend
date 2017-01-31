@@ -1,4 +1,13 @@
 var User = require('../models/user');
+var searchUser=function(mailId){
+        return new Promise((resolve,reject)=>{
+            User.findOne({email:mailId},(err,user)=>{
+                if(err) reject("Error during quering");
+                else resolve(user);
+            })
+        
+        })
+    }
 module.exports={
         searchForUser:((mailId)=>{
         return new Promise((resolve,reject)=>{
@@ -27,7 +36,11 @@ module.exports={
                 } 
                 else{
                     console.log(doc);
-                    resolve(doc);
+                    var user=searchUser(obj.email);
+                    console.log(user);
+                 //   resolve(doc);
+                    user.then((doc)=>resolve(doc)).catch((err)=>reject(err));
+                    
                 }
 
             })

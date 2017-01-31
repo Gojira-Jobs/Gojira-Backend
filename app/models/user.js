@@ -22,29 +22,25 @@ let userSchema = new Schema({
     high_qual_perc :{ type:Number,
                 default:0},
     pursuing_status : { type:Boolean,
-    default:false},
+                default:false},
     dob : { type:Date,
                 default:Date.now},
     gender :{ type:String,
                 default:"Male"},
-    resume : String,
-    picture : String,
-    address :{
-        street :{type:String,
+    street :{type:String,
             default:"",trim:true
             } ,
-        city :{type:String,
+    city :{type:String,
             default:"",trim:true
             },
-        state : {type:String,
+    state : {type:String,
             default:"",trim:true
             },
-        pincode : {type:Number,
+    pincode : {type:Number,
             default:0
-            }
-    },
-    
-  
+            },
+    resume : String,
+    picture : String,
 })
 /*userSchema.virtual('userData').get(()=>{
     let st=this.name+" "+this.mobile+" "+this.email+" "+this.address.street;
