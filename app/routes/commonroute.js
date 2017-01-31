@@ -47,7 +47,7 @@ router.post('/',function(req,res){
                     name: resolve.name,
                     email: resolve.email,
                     gender: resolve.gender,
-                    ishr: true
+                    ishr:false
                 };
                     res.status(200).send({'status':1,'data':senddata});
                 }
