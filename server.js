@@ -59,8 +59,7 @@ app.get('/setup',(req,res,next)=>{
 app.use('/api',PostRouter);
 app.use('/api/register',user_regis);
 app.use('/api/authenticate',commonlogin);
-app.use('/api/user',UserRouter);// If want to use this route as /api then other route like /api/admin,/api/super
-//Authentication going to meet problem, think about it....
+app.use('/api',UserRouter);
 app.use('/api/super/login',superlogin);
 app.use('/api/user/auth',auth_user_route);
 app.use('/api/admin/auth',auth_admin_route);

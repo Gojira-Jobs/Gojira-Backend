@@ -9,7 +9,7 @@ router.use(userauth.user);
 router.post('/signout',function(req,res){
     console.log('In Signout');
     let obj = {
-        'email': req.headers.email.toLowerCase()
+        'email': req.body.email.toLowerCase()
     };
     databasefunction.signout(obj).then((resolve)=>{
         if(resolve == null || resolve.length <= 0) res.status(404).send({'status':0,'err':'User not found'});

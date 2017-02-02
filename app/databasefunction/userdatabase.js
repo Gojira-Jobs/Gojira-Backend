@@ -72,7 +72,7 @@ module.exports = {
     usertokenfind: (obj)=> {
         return new Promise((resolve,reject)=> {
             console.log('In User-> Find Token');
-            User.findOne({'email': obj.email, 'token': obj.token},{_id:0,otp:0,name:0,password:0},(err,data)=> {
+            User.findOne({'email': obj.email},{_id:0,password:0},(err,data)=> {
                 console.log('Token Find:' + data);
                 if(err) reject(err);
                 else resolve(data);

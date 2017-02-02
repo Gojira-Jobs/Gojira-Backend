@@ -16,15 +16,12 @@ router.post('/',function(req,res){
             console.log('Data are: '+ resolve);
             if(resolve.ok === 1){
                 console.log('Login Successfully Done..');
-                console.log('Resolve Token'+ resolve.tokenid);
-                let senddata = {
-                    token: resolve.tokenid,
-                    name: resolve.name,
-                    email: resolve.email,
-                    gender: resolve.gender,
+                console.log('Resolve Token'+ resolve.token);
+                /*let senddata = {
+                    data:resolve,
                     ishr: true
-                };
-                res.status(200).send({'status':1,'data':senddata});
+                };*/
+                res.status(200).send({'status':1,'data':resolve,isHr: true});
             }
             else {
                 console.log('Userid or Password not match');
@@ -41,15 +38,16 @@ router.post('/',function(req,res){
                 console.log('Data are: '+ resolve);
                 if(resolve.ok === 1){
                     console.log('Login Successfully Done..');
-                    console.log('Resolve Token'+ resolve.tokenid);
-                let senddata = {
+                    console.log('Resolve Token'+ resolve.user.token);
+                /*    let senddata = {
                     token: resolve.tokenid,
                     name: resolve.name,
                     email: resolve.email,
                     gender: resolve.gender,
-                    ishr:false
+                    ishr: true
                 };
-                    res.status(200).send({'status':1,'data':senddata});
+                */
+                    res.status(200).send(resolve.user);
                 }
                 else {
                     console.log('Userid or Password not match');

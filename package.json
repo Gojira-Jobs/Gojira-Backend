@@ -5,7 +5,7 @@
   "main": "config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "express": "^4.14.0",
     "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.7.8",
+    "mongoose-schema-formatdate": "^1.0.0",
     "morgan": "^1.7.0",
     "mpromise": "^0.5.5"
   }

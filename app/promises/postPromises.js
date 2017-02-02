@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var postTable=require('../models/admin').postSchema;
+var appTable=require('../models/apply');
 var hrTable=require('../models/admin').hrSchema;
 function searchForAdmin(mailId){
     return new Promise((resolve,reject)=>{
@@ -69,6 +70,41 @@ module.exports={
         })
 
        }) 
-    })
+    }),
+
+    addApplicant: function(data){
+       return new Promise((resolve,reject)=>{
+                console.log("Inside Job applicant");
+                //let appData={job_id:data.job_id,email:data.email};
+                console.log(data);
+                appTable.create(data,(err,res)=>{
+                    console.log('Create Section');
+                    if(err){
+                        console.log('Error in addApplication: ',err);
+                        reject(err);}
+                    else{
+                        console.log('Result Found: ', res);
+                        resolve("Applied Successfully");
+                    }  
+                })
+       }) 
+    },
+    getApplicantInfo:(job_id)=>{
+        return new Promise((resolve,reject)=>{
+                        appTable.find({job_id:job_id},{email:1},(err,docs)=>{
+                            if(err) reject(err);
+                            else resolve(docs);
+                        })
+                    })
+    },
+
+    getAppliedJobInfo:(email)=>{
+        return new Promise((resolve,reject)=>{
+                        appTable.find({email:email},{job_id:1,_id:0},(err,docs)=>{
+                            if(err) reject(err);
+                            else resolve(docs);
+                        })
+                    })
+    }
 }
 

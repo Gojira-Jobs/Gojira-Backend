@@ -24,10 +24,7 @@ module.exports = {
                         console.log('Update Result: '+ resolv);
                         let senddata = {
                                 ok:1,
-                                tokenid: token,
-                                name: resolv.name,
-                                email: resolv.email,
-                                gender: resol.gender,
+                                user:resolv
                         };
                         console.log('From Login send data: '+ senddata);
                         resol (senddata);
@@ -44,20 +41,19 @@ module.exports = {
     },
 
     userlogin: (username,password)=> {
-            return new Promise((resol,rej)=>{
+        return new Promise((resol,rej)=>{
             console.log('User Promise Enter');
-             let obj ={
+            let obj ={
                 'email':username,
                 'password':password
-             };
+            };
             user.userlogin(obj).then((resolve)=>{
                 console.log('Resolve:', resolve);
                 if(resolve == null || resolve.length <= 0){
                     console.log('User Data Not Found');
                     resol  ({ok:2});
                 }
-               else {
-
+                else {
                     console.log('User Fond now wait for token');
                     let token = gettoken(obj.email);
                     console.log('Token is: ',token);
@@ -65,10 +61,7 @@ module.exports = {
                         console.log('Update Result: '+ resolv);
                         let senddata = {
                                 ok:1,
-                                tokenid: token,
-                                name: resolv.name,
-                                email: resolv.email,
-                                gender: resol.gender,
+                                user:resolv
                         };
                         resol (senddata);
                     }).catch((reject)=>{

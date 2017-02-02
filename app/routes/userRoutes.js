@@ -46,10 +46,10 @@ router.route('/user')
         else{
            // userdata=JSON.parse(userdata);
             var userData=userdata.toObject();
-           userData.isHr=false;
-            console.log(userData);
-           // console.log("userdata:" + userdata);
-            res.json({success:true,data:JSON.stringify(userData),msg:"User data send"});
+            userData.isHr=false;
+            //console.log(userData);
+            console.log("userdata:" + userData);
+            res.json({success:true,data:userData,msg:"User data send"});
         }
     }).catch((err)=>{
         console.log(err);
@@ -59,7 +59,7 @@ router.route('/user')
     if(!req.body.email)
         res.status(errors.BADREQUEST.code).json({msg:errors.BADREQUEST.msg});
     else{
-        console.log(req.body);
+        console.log("Put req body"+req.body);
         var updateData=userPromises.setData(req.body);
         updateData.then((data)=>{
             res.status(errors.ACCEPTED.code).json({msg:"Updation Completed",data:data});

@@ -7,7 +7,7 @@ exports.superauth = (req,res,next)=> {
     else if(req.headers.token === "No") res.status(401).send({'status': 0,'err':'unauthorized user'});
     else {
          var token = req.headers.token;
-         var userid = req.headers.email;
+         var userid = req.body.email;
          console.log('Token and Username: '+ token,userid);
          let obj ={
             'username' : userid,
@@ -49,9 +49,12 @@ exports.admin = (req,res,next)=>{
 
 exports.user = (req,res,next)=>{
     console.log('Inside User Authentication Function '+ JSON.stringify(req.headers));
-    if(!req.headers.token)  res.status(401).send({'status':false,'err':'unauthorized user'});
+    if(!req.headers.token) {
+        res.status(401).send({'status':false,'err':'unauthorized user'});
+    } 
     else {
          var token = req.headers.token;
+        
          var userid = req.headers.email;
          console.log('Token and Username: '+ token,userid);
          User.usertokenfind({'email': userid,'token':token}).then((resolve)=>{
