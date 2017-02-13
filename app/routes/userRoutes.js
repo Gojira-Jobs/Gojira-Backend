@@ -19,25 +19,11 @@ router.route('/users')
            res.end("Can't Serve Anything..");
        })
 });
+
+
 router.use(userauth.user);
-// router.post('/register',(req,res)=>{
-//     var data=req.body;
-  
-//     data.token=jwt.sign({email:data.email,password:data.password},secretKey,{ expiresIn:"10h"});
-//     console.log(data);
-//     var user=userPromises.addUser(data);
-//     user.then((doc)=>{
 
-//         res.status(errors.CREATED.code).json({msg:"User added..",data:{username:doc.name,token:doc.token,email:doc.email}});
-//     }).catch((err)=>{
-//         console.log(err);
-//         res.status(errors.INTERNAL.code).json({msg:"Registration Failed..."});
-//     });
-// });
-
-
-
-router.route('/user')
+router.route('/')
 .get((req,res,next)=>{
     console.log("gsggs "+req.headers.email);
     let user=userPromises.searchForUser(req.headers.email);

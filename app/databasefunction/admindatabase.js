@@ -27,7 +27,7 @@ module.exports = {
         console.log('In Admin-> Token Update..');
         console.log('In Update Token: '+ obj.token);
         return new Promise((resolve,reject)=>{
-            admin.hrSchema.findOneAndUpdate({'email':obj.email},{$set:{'token':obj.token}},(err,data)=>{
+            admin.hrSchema.findOneAndUpdate({'email':obj.email},{$set:{'token':obj.token}},{new: true},(err,data)=>{
                 console.log('In Admin-> Token Update ', data);
                 if(err) reject(err);
                 else resolve(data);
@@ -38,7 +38,9 @@ module.exports = {
     admintokenfind: (obj)=>{
         return new Promise((resolve,reject)=> {
             console.log('In Admin-> Find Token');
-            admin.hrSchema.findOne({'email':obj.email,'token':obj.token},{_id: 0, name: 0, password:0},(err,data)=> {
+            console.log('Object email: ',obj.email);
+            console.log('Object token: ',obj.token);
+            admin.hrSchema.findOne({'email':obj.email},{_id: 0, name: 0, password:0},(err,data)=> {
                 console.log('In Admin-> Token Find ', data);
                 if(err) reject(err);
                 else resolve(data);

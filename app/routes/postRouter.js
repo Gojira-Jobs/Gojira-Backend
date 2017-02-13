@@ -4,21 +4,8 @@ var postPromises=require('../promises/postPromises');
 let errors = require("../config");
 var authenticate = require('../authentication/authenticate.js');
 
-//router.use(authenticate.admin);
 
 router.route('/joblisting')
-.post((req,res,next)=>{
-    var postCreated=postPromises.addPost(req.body);
-    postCreated.then((msg)=>{
-        res.status(errors.CREATED.code).json({msg:msg});
-    }).catch((err)=>{
-        if(err===null || err === 'undefined')
-            res.status(errors.BADREQUEST.code).json({msg:"PostBy by UnAuthorized Person"});
-        else
-            res.status(errors.BADREQUEST.code).json({msg:errors.BADREQUEST.msg});
-    })
-
-})
 .get((req,res,next)=>{
     var getData=postPromises.getPosts();
     getData.then((docs)=>{
@@ -28,27 +15,44 @@ router.route('/joblisting')
         res.status(errors.INTERNAL.code).json({error:errors.INTERNAL.msg});
     })
 })
-router.route('/hr/postedJobs')
-.get((req,res,next)=>{
-    
-    var getPostedJobs = postPromises.getPostedJobs(req.query.email);
 
-    getPostedJobs.then((docs)=>{
-        res.status(errors.ACCEPTED.code).json({docs:docs});
-    }).catch((err)=>{
-        if(err===null || err === 'undefined')
-            res.status(errors.ACCEPTED.code).json({msg:"User Not Posted anything"});
+router.route('/matchpass')
+.post((req,res,next)=>{
+    console.log("Inside Password Match Apply");
+    let obj={
+        'email':req.headers.email,
+        'token':req.headers.token,
+        'oldPass':req.body.oldPass,
+        'isHr':req.body.isHr
+    };
+    console.log(obj);
+    var match=postPromises.passwordMatch(obj);
+    match.then((user)=>{
+        if(user){
+            res.status(errors.CREATED.code).json({status:1});
+        }
         else
-            res.status(errors.INTERNAL.code).json({msg:errors.INTERNAL.msg});
-    });
+        {
+            res.status(errors.CREATED.code).json({status:0,msg:"Old Password is not correct"});
+        }
+    }).catch((err)=> {
+        console.log('In Error1');
+        if(err == null || err == undefined)
+            res.status(errors.BADREQUEST.code).json({status:0,msg:"Old Password is not correct"});
+        else
+            res.status(errors.BADREQUEST.code).json({status:0,msg:errors.BADREQUEST.msg});
+    })
 })
+
+router.use(authenticate.user);
 
 router.route('/apply')
 .post((req,res,next)=>{
     console.log("Inside Job Apply");
     let obj={
         'email':req.body.email,
-        'job_id':req.body.job_id
+        'job_id':req.body.job_id,
+        'resume':req.body.resume
     };
     console.log(obj);
     var applied=postPromises.addApplicant(obj);
@@ -62,15 +66,6 @@ router.route('/apply')
             res.status(errors.BADREQUEST.code).json({msg:errors.BADREQUEST.msg});
     })
 })
-.get((req,res,next)=>{
-    var getApplicants = postPromises.getApplicantInfo(req.query.job_id);
-    getApplicants.then((docs)=>{
-        if(!docs) res.status(errors.ACCEPTED.code).json({status:0,users:docs,msg:errors.ACCEPTED.msg});
-        else res.status(errors.ACCEPTED.code).json({status:1,jobs:docs,msg:errors.ACCEPTED.msg});
-    }).catch((err)=>{
-        res.status(errors.INTERNAL.code).json({error:errors.INTERNAL.msg});
-    })
-})
 
 router.route('/applied')
 .get((req,res,next)=>{
@@ -82,5 +77,6 @@ router.route('/applied')
         res.status(errors.INTERNAL.code).json({error:errors.INTERNAL.msg});
     })
 })
+
 
  module.exports=router;

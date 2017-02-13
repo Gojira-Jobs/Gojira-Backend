@@ -1,5 +1,4 @@
-var mongoose = require('mongoose'),
-    FormatDate = mongoose.Schema.Types.FormatDate= require('../../node_modules/mongoose-schema-formatdate/formatdate');
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
@@ -25,8 +24,8 @@ let userSchema = new Schema({
                 default:0},
     pursuing_status : { type:Boolean,
                 default:false},
-    dob : { type:FormatDate, format: 'YYYY-MM-DD',
-                default:Date.now},
+    dob : { type:String,
+                default:''},
     gender :{ type:String,
                 default:"Male"},
     street :{type:String,
@@ -48,8 +47,5 @@ let userSchema = new Schema({
     resume : String,
     picture : String,
 })
-/*userSchema.virtual('userData').get(()=>{
-    let st=this.name+" "+this.mobile+" "+this.email+" "+this.address.street;
-    return st;
-})*/
+
 module.exports=mongoose.model('users',userSchema);

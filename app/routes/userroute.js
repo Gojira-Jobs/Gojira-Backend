@@ -7,7 +7,7 @@ router.use(userauth.user);
 
 
 router.post('/signout',function(req,res){
-    console.log('In Signout');
+    console.log('In User Signout '+req.body.email);
     let obj = {
         'email': req.body.email.toLowerCase()
     };

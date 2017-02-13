@@ -7,6 +7,9 @@ let jobSchema = new Schema({
                 trim:true},
     email : { type:String,
                 required:true,
-                trim:true}
+                trim:true},
+    resume : { type:String,
+    			required:true,
+    			trim:true}
 });
 module.exports=mongoose.model('applications',jobSchema);

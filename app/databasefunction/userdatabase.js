@@ -37,10 +37,15 @@ module.exports = {
 
     insertdata: (obj)=> {
         return new Promise((resolve,reject)=> {
-            console.log('In User-> Insert Data');
-            User.create(obj,(err,data)=> {
-                console.log('Inasertion Callback');
-                if(err) reject(err);
+            console.log('In User-> Insert Data ',obj);
+            console.log("hhffhf");
+            User.create({'name': obj.name, 'email': obj.email, 'password': obj.password, 'token': obj.token},
+             (err,data)=> {
+                console.log('Insertion Callback');
+                if(err){
+                    console.log(err);
+                    reject(err);
+                } 
                 else resolve(data);
             });
         });

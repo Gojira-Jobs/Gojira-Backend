@@ -2,9 +2,11 @@ var mongoose = require('mongoose');
 var postTable=require('../models/admin').postSchema;
 var appTable=require('../models/apply');
 var hrTable=require('../models/admin').hrSchema;
+var User = require('../models/user');
+
 function searchForAdmin(mailId){
     return new Promise((resolve,reject)=>{
-        hrTable.findOne({email:mailId},{_id:1},(err,doc)=>{
+        hrTable.findOne({email:mailId},(err,doc)=>{
             if(err) {
                 console.log("doc:",err);
             reject(err);}
@@ -24,6 +26,40 @@ module.exports={
             })
        });
     }),
+
+    setData:((obj)=>{
+        return new Promise((resolve,reject)=>{
+        hrTable.update({email:obj.email},{$set:obj},(err,doc)=>{
+                if(err){
+                    console.log(err);
+                    reject(err);
+                } 
+                else{
+                    console.log(doc);
+                    var user=searchForAdmin(obj.email);
+                    console.log(user);
+                 //   resolve(doc);
+                    user.then((doc)=>resolve(doc)).catch((err)=>reject(err));
+                    
+                }
+
+            })
+        })
+    }),
+
+    searchForHr: (mailId)=>{
+    return new Promise((resolve,reject)=>{
+        hrTable.findOne({email:mailId},(err,doc)=>{
+            if(err) {
+                console.log("doc:",err);
+            reject(err);}
+            else{
+                resolve(doc);
+            } 
+        })
+    });
+},
+
     getPostedJobs:(mailId)=>{
         return new Promise((resolve,reject)=>{
                 var HrFinder=searchForAdmin(mailId);
@@ -91,7 +127,7 @@ module.exports={
     },
     getApplicantInfo:(job_id)=>{
         return new Promise((resolve,reject)=>{
-                        appTable.find({job_id:job_id},{email:1},(err,docs)=>{
+                        appTable.find({job_id:job_id},{email:1,resume:1},(err,docs)=>{
                             if(err) reject(err);
                             else resolve(docs);
                         })
@@ -105,6 +141,34 @@ module.exports={
                             else resolve(docs);
                         })
                     })
-    }
+    },
+
+    getUserInfo:((mailId)=>{
+        return new Promise((resolve,reject)=>{
+            User.findOne({email:mailId},{password:0,_id:0,token:0,_v:0,isHr:0},(err,user)=>{
+                if(err) reject("Error during quering");
+                else resolve(user);
+            })
+        
+        })
+    }),
+
+    passwordMatch:((obj)=>{
+        console.log("inside password promise",obj);
+        return new Promise((resolve,reject)=>{
+            if(obj.isHr==false){
+                User.findOne({email:obj.email, password:obj.oldPass},{password:0,_id:0,token:0,_v:0,isHr:0},(err,user)=>{
+                    if(err) reject(0);
+                    else resolve(user);
+                })
+            }
+            else{
+                hrTable.findOne({email:obj.email, password:obj.oldPass},{password:0,_id:0,token:0,_v:0,isHr:0},(err,user)=>{
+                    if(err) reject(0);
+                    else resolve(user);
+                })
+            }
+        })
+    })
 }
 

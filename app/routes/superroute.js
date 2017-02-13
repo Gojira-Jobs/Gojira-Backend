@@ -25,7 +25,7 @@ router.post('/admin-insert',function(req,res){
                                 'name' : req.body.name,
                                 'gender': req.body.gender,
                                 'token' : 'No',
-                                'otp' : 'No'
+                                'isHr': true
                             };
                              console.log('Check Email Finish');
                             databasefunction.admininsert(obj).then((resolve)=> {

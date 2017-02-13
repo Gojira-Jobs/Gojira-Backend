@@ -39,11 +39,11 @@ router.post('/',function(req,res){
 							}).catch((err)=> {
 								console.log('Error due to mail transfer: ', err);
 								res.status(500).send({'status':0,'err':'Internal Server Error!'});
-							})
+							});
 						}).catch((reje)=> {
 							console.log('error in insertion: ',reje);
 							res.status(500).send({'staus':0,'err':'Internal Server Error'});
-						})
+						});
 					}
 					else{
 						console.log('Duplicate Email');
