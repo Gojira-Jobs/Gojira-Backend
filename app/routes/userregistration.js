@@ -15,6 +15,7 @@ router.post('/', function(req, res) {
     if (!req.body) res.satus(401).send({ 'status': 0, 'data': 'Unauthorized User' });
     else {
         let obj = req.body;
+        obj.verify = 'No';
         console.log('Coming Data: ', obj);
         databasefunction.emailfind(obj).then((resol) => {
             if (resol === null) {
@@ -22,12 +23,12 @@ router.post('/', function(req, res) {
                 obj.token = tokenfun.gettoken(obj.email);
                 databasefunction.insertdata(obj).then((solv) => {
                     console.log('Insertion Done Successfully');
-                    let activate_url = 'http://localhost:4200/profile?email:' + obj.email + '&token:' + obj.token;
+                    let activate_url = 'http://localhost:4200/profile?email=' + obj.email + '&token=' + obj.token;
                     let maildata = {
                         'email': obj.email,
                         'subject': 'Gojira Account Activation Link',
                         'text': 'Welcome Message',
-                        'html_msg': '<h1>Welcome In Gojira Job Portal.<br> To Activate Your Account Click on Below Link</h1><h2>' + activate_url + '</h3>'
+                        'html_msg': '<h1>Welcome In Gojira Job Portal.<br> To Activate Your Account Click on Below Link and Valid For 1Hour</h1><h2>' + activate_url + '</h3>'
                     };
                     nodemail(maildata).then((data) => {
                         console.log('Insertion Successsfully Done');

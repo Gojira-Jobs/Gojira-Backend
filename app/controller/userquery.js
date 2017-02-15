@@ -50,6 +50,16 @@ module.exports = {
         });
     },
 
+    useremailverify: (obj) => {
+        return new Promise((resolve, reject) => {
+            User.findOneAndUpdate({ 'email': obj.email, 'token': obj.token }, { $set: { 'verify': 'Yes', 'token': obj.ntoken } }, (err, data) => {
+                console.log('Data: ', data);
+                if (err) reject(err);
+                else resolve(data);
+            });
+        })
+    },
+
     userlogin: (obj) => {
         return new Promise((resolve, reject) => {
             console.log('In User-> To Login');

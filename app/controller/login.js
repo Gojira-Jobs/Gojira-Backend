@@ -46,20 +46,24 @@ module.exports = {
                     resol({ ok: 2 });
                 } else {
                     console.log('User Fond now wait for token');
-                    let token = tokenfun.gettoken(obj.email);
-                    console.log('Token is: ', token);
-                    user.usertokenupdate({ 'email': obj.email, 'token': token }).then((resolv) => {
-                        console.log('Update Result: ' + resolv);
-                        resolv.token = token;
-                        let senddata = {
-                            ok: 1,
-                            user: resolv
-                        };
-                        resol(senddata);
-                    }).catch((reject) => {
-                        console.log('Reject due to update token');
-                        rej({ ok: 3 });
-                    })
+                    if (resolve.verify == 'Yes') {
+                        let token = tokenfun.gettoken(obj.email);
+                        console.log('Token is: ', token);
+                        user.usertokenupdate({ 'email': obj.email, 'token': token }).then((resolv) => {
+                            console.log('Update Result: ' + resolv);
+                            resolv.token = token;
+                            let senddata = {
+                                ok: 1,
+                                user: resolv
+                            };
+                            resol(senddata);
+                        }).catch((reject) => {
+                            console.log('Reject due to update token');
+                            rej({ ok: 3 });
+                        })
+                    } else {
+                        resol({ 'ok': 0 })
+                    }
                 }
             }).catch((reject) => {
                 console.log('Error in userlogin');

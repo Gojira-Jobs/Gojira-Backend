@@ -9,7 +9,7 @@ let nodemail = require('../helper/nodemail');
 router.use(headercheck.headerchecking);
 router.use(bodyparser());
 
-router.post('/user', function(req, res) {
+router.post('/', function(req, res) {
 
     console.log(req.body.email, req.body.password, req.body.isHr);
     let obj = {
@@ -40,7 +40,8 @@ router.post('/user', function(req, res) {
                 console.log('Login Successfully Done..');
                 console.log('Resolve Token ' + resolve.user.token);
                 res.status(200).send(resolve.user);
-            } else {
+            } else if (resolve.ok == 0) res.status(422).send({ 'status': 5, 'err': 'Please Verify your email, after that you can login' })
+            else {
                 console.log('Userid or Password not match');
                 res.status(401).send({ 'status': 0, 'err': 'Userid or Password Not Match' });
             }
