@@ -4,7 +4,8 @@ let tokenfun = require('../helper/jwttoken');
 module.exports = function(obj) {
     return new Promise((resolve, reject) => {
         user.usertokenfind(obj).then((solve) => {
-                if (solve) {
+                if (solve == null || solve.length <= 0) resolve({ 'ok': 0 });
+                else {
                     tokenfun.verifytoken(obj).then((info) => {
                         if (info.verify == 1) {
                             obj.ntoken = tokenfun.gettoken(obj.email);
@@ -16,9 +17,7 @@ module.exports = function(obj) {
                                     } else resolve({ 'ok': 2 })
                                 })
                                 .catch(err => reject(err))
-                        } else {
-                            resolve({ 'ok': 0 });
-                        }
+                        } else resolve({ 'ok': 2 })
                     }).catch(err => reject(err))
                 }
             })

@@ -9,8 +9,8 @@ module.exports = {
         else if (!req.headers.email) res.status(401).send({ 'status': false, 'err': 'unauthorized user' });
         else if (req.headers.token == 'No') res.status(401).send({ 'status': 0, 'err': 'Unauthorized User' })
         let obj = {
-            'username': req.body.email,
-            'token': req.body.username
+            'username': req.headers.email,
+            'token': req.headers.token
         };
         superuser.findtoken(obj).then((resolve) => {
             console.log('TOKEN SEARCH DONE->>>');
@@ -50,7 +50,7 @@ module.exports = {
                     tokenfun.verifytoken(obj).then((solve) => {
                         if (solve.verify == 0) {
                             obj.token = tokenfun.gettoken(obj.email);
-                            admin.admintokenupdate().then(data => res.status(200).send({ 'status': 4, 'token': obj.token }))
+                            admin.admintokenupdate(obj).then(data => res.status(200).send({ 'status': 4, 'token': obj.token }))
                                 .catch(err => res.status(500).send({ 'status': 0, 'err': 'Internal Server Error' }))
                         } else {
                             next();
@@ -65,7 +65,7 @@ module.exports = {
     },
 
     user: (req, res, next) => {
-        console.log('Inside User Authentication Function ' + JSON.stringify(req.headers));
+        console.log('Inside User Authentication Function11 ' + JSON.stringify(req.headers));
         if (!req.headers.token) res.status(401).send({ 'status': 0, 'err': 'Unauthorized user' })
         else if (!req.headers.email) res.status(401).send({ 'status': 0, 'err': 'Unauthorized user' })
         else if (req.headers.token == 'No') res.status(401).send({ 'status': 0, 'err': 'Unauthorized User' })

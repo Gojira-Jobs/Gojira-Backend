@@ -7,16 +7,10 @@ var cors = require('cors');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
 var User = require('./app/models/user');
-var UserRouter = require('./app/routes/userRoutes');
 var PostRouter = require('./app/routes/postRouter');
 var userPromises = require('./app/promises/userPromises');
 var Hr = require('./app/models/admin').hrSchema;
-var commonlogin = require('./app/routes/commonroute');
-var superlogin = require('./app/routes/superlogin');
-var auth_user_route = require('./app/routes/userroute'); //user route
-var hr_route = require('./app/routes/adminroute'); // admin route
-var auth_super_route = require('./app/routes/superroute'); // super user route
-var user_regis = require('./app/routes/userregistration'); // user registration route
+var root = require('./app/routes/root');
 mongoose.connect(config.url);
 var db = mongoose.connection;
 mongoose.set('debug', true);
@@ -57,13 +51,7 @@ app.get('/setup', (req, res, next) => {
 
 
 })
-app.use('/api/register', user_regis);
-app.use('/api/authenticate', commonlogin);
-app.use('/api/user', UserRouter);
-app.use('/api/super/login', superlogin);
-app.use('/api/user/auth', auth_user_route);
-app.use('/api/hr', hr_route);
-app.use('/api/super/auth', auth_super_route);
+app.use('/api/root', root);
 app.use('/api/post', PostRouter);
 
 app.listen(8000);
