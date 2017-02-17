@@ -1,7 +1,7 @@
-let superuser = require('../controller/superquery');
-let admin = require('../controller/hrquery');
-let user = require('../controller/userquery');
-let tokenfun = require('../helper/jwttoken');
+let superuser = require('../helper/superquery');
+let admin = require('../helper/hrquery');
+let user = require('../helper/userquery');
+let tokenfun = require('./jwttoken');
 
 module.exports = {
     adminlogin: (obj) => {

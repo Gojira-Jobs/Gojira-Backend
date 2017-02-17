@@ -7,7 +7,6 @@ var cors = require('cors');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
 var User = require('./app/models/user');
-var PostRouter = require('./app/routes/postRouter');
 var userPromises = require('./app/promises/userPromises');
 var Hr = require('./app/models/admin').hrSchema;
 var root = require('./app/routes/root');
@@ -52,7 +51,6 @@ app.get('/setup', (req, res, next) => {
 
 })
 app.use('/api/root', root);
-app.use('/api/post', PostRouter);
 
 app.listen(8000);
 console.log("Server is Running...");

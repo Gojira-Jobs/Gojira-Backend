@@ -1,5 +1,5 @@
-let user = require('./userquery');
-let tokenfun = require('../helper/jwttoken');
+let user = require('../helper/userquery');
+let tokenfun = require('./jwttoken');
 
 module.exports = function(obj) {
     return new Promise((resolve, reject) => {

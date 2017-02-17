@@ -1,7 +1,7 @@
-let superuser = require('../controller/superquery');
-let admin = require('../controller/hrquery.js');
-let User = require('../controller/userquery.js');
-let tokenfun = require('../helper/jwttoken');
+let superuser = require('../helper/superquery');
+let admin = require('../helper/hrquery.js');
+let User = require('../helper/userquery.js');
+let tokenfun = require('../services/jwttoken');
 
 module.exports = {
     superauth: (req, res, next) => {
