@@ -50,7 +50,11 @@ app.get('/setup', (req, res, next) => {
 
 
 })
+<<<<<<< HEAD
 app.use('/api', root);
+=======
+app.use('/api/root', root);
+>>>>>>> 1b9c94469cb549662d0efc65c212cdd7b3270d37
 
 app.listen(8000);
 console.log("Server is Running...");
