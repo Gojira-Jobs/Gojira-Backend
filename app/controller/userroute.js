@@ -12,6 +12,7 @@ module.exports = {
             databasefunction.emailfind(obj).then((resol) => {
                 if (resol === null) {
                     obj.token = tokenfun.gettoken(obj.email);
+                    obj.verify = 'No';
                     databasefunction.insertdata(obj).then((solv) => {
                         let activate_url = 'http://localhost:4200/profile?email=' + obj.email + '&token=' + obj.token;
                         let maildata = {

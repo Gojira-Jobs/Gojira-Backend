@@ -1,11 +1,14 @@
 let googleStrategy = require('passport-google-oauth').OAuth2Strategy;
-let User = require('./../models/user');
+let User = require('../models/user');
+let user = require('../helper/userquery');
+let tokenFun = require('../services/jwttoken');
 
 module.exports = class {
 
-    constructor(passport, passprtConfig) {
+    constructor(passport, passprtConfig, userinfo) {
         this.passport = passport;
         this.passprtConfig = passprtConfig;
+        this.userinfo = userinfo;
         console.log("GAbbar============================================", this.passprtConfig);
         this.initConfig();
     }
@@ -30,6 +33,10 @@ module.exports = class {
                 console.log('In Callback Token Function: ');
                 process.nextTick(() => {
                     console.log('Profile Information', profile.displayName, profile.emails[0].value);
+                    this.userinfo.name = profile.displayName;
+                    this.userinfo.email = profile.emails[0].value;
+                    this.userinfo.token = tokenFun.gettoken(this.userinfo.email);
+                    console.log('In Callback userinfo: ', this.userinfo);
                     return done(null, profile);
                 })
             }
