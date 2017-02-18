@@ -1,6 +1,6 @@
-let admin = require('./hrquery');
-let user = require('./userquery');
-let tokenfun = require('../helper/jwttoken');
+let admin = require('../helper/hrquery');
+let user = require('../helper/userquery');
+let tokenfun = require('./jwttoken');
 
 module.exports = {
     adminforget: (obj) => {
