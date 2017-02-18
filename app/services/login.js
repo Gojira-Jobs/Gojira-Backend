@@ -46,7 +46,7 @@ module.exports = {
                     resol({ ok: 2 });
                 } else {
                     console.log('User Fond now wait for token');
-                    if (resolve.verify == 'Yes') {
+                    if (resolve.verified == true) {
                         let token = tokenfun.gettoken(obj.email);
                         console.log('Token is: ', token);
                         user.usertokenupdate({ 'email': obj.email, 'token': token }).then((resolv) => {

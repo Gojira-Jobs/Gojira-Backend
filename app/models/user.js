@@ -6,7 +6,6 @@ let userSchema = new Schema({
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true, trim: true },
-    verify: { type: String, default: 'No' },
     phonenumber: { type: String, trim: true },
     token: { type: String, default: 'No' },
     high_qual: { type: String, trim: true },
@@ -29,6 +28,7 @@ let userSchema = new Schema({
     },
     resume: String,
     picture: String,
+    verified: {type: Boolean, default: false}
 })
 
 module.exports = mongoose.model('users', userSchema);

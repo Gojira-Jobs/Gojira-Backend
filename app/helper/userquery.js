@@ -52,7 +52,8 @@ module.exports = {
 
     useremailverify: (obj) => {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ 'email': obj.email, 'token': obj.token }, { $set: { 'verify': 'Yes', 'token': obj.ntoken } }, (err, data) => {
+            console.log("Here to set token and verified status>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            User.findOneAndUpdate({ 'email': obj.email, 'token': obj.token }, { $set: { 'verified': true, 'token': obj.ntoken } }, {new: true}, (err, data) => {
                 console.log('Data: ', data);
                 if (err) reject(err);
                 else resolve(data);
