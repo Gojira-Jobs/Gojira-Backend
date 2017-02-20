@@ -39,7 +39,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             console.log('In User-> Insert Data ', obj);
             console.log("hhffhf");
-            User.create({ 'name': obj.name, 'email': obj.email, 'password': obj.password, 'token': obj.token },
+            User.create({ 'name': obj.name, 'email': obj.email, 'password': obj.password, 'token': obj.token, 'verify': obj.verify },
                 (err, data) => {
                     console.log('Insertion Callback');
                     if (err) {

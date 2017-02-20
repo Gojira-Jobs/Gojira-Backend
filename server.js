@@ -50,6 +50,7 @@ app.get('/setup', (req, res, next) => {
 
 
 })
+
 app.use('/api', root);
 
 app.listen(8000);
