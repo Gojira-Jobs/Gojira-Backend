@@ -23,21 +23,13 @@ router.use(passport.initialize());
 router.get('/googleauth', passport.authenticate('google', { scope: ['profile', 'email'] }))
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'http://2f145d31.ngrok.io/login' }),
     function(req, res) {
-        console.log('I am Here');
-        console.log('Data:', passportData.userinfo);
         googleDataProcess(passportData.userinfo).then(data => {
-            if (data.ok == 1) {
-                console.log('Successfully Login');
-                res.status(200).send({ 'status': 1, 'data': data.data });
-            } else {
-                console.log('Successfully Registered');
-                res.status(200).send({ 'status': 1, 'data': data.data });
-            }
-        }).catch(err => {
-            console.log('error----->', err);
-            res.status(500).send({ 'status': 0, 'err': 'Internal Server error' })
-        })
+                if (data.ok == 1) res.status(200).send({ 'status': 1, 'data': data.data })
+                else res.status(200).send({ 'status': 1, 'data': data.data })
+            })
+            .catch(err => res.status(500).send({ 'status': 0, 'err': 'Internal Server error' }))
     })
+
 router.post('/register', headercheck.headerchecking, user.registration)
 router.post('/verified', user.verifyaccount)
 router.post('/resendlink', user.resendlink)
