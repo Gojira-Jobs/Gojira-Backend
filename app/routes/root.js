@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let bodyparser = require('body-parser');
+let cors = require('cors');
 let authfun = require('../authentication/authenticate');
 let headercheck = require('../authentication/headercheck');
 let superfun = require('../controller/superroute');
@@ -16,6 +17,7 @@ var passportData = new LocalPassport(passport, ppConfig, { 'name': '', 'email': 
 
 passportData.initConfig();
 router.use(bodyparser());
+router.use(cors());
 router.use(passport.initialize());
 
 //userroute
