@@ -33,11 +33,13 @@ module.exports = {
         if (!req.headers.token) res.status(422).send({ 'status': 0, 'err': 'Provide Information' })
         else if (!req.headers.email) res.status(422).send({ 'status': 0, 'err': 'Provide Information' })
         else {
+            console.log("Inside verify account route>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             let obj = {
                 'email': req.headers.email,
                 'token': req.headers.token
             };
             verifyaccount(obj).then((data) => {
+                    console.log("Email account verified>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     if (data.ok == 1) res.status(200).send({ 'status': 1, 'data': data })
                     else if (data.ok == 0) res.status(404).send({ 'status': 0, 'err': 'Account Not Found' })
                     else res.status(422).send({ 'status': 2, 'err': 'Activation Link Timeout' })
@@ -60,7 +62,7 @@ module.exports = {
                     else {
                         obj.token = tokenfun.gettoken(obj.email);
                         databasefunction.usertokenupdate(obj).then(data => {
-                                let activate_url = 'http://localhost:4200/profile?email=' + obj.email + '&token=' + obj.token;
+                                let activate_url = 'http://localhost:4200/verifyemail?email=' + obj.email + '&token=' + obj.token;
                                 let maildata = {
                                     'email': obj.email,
                                     'subject': 'Gojira Account Activation Link',
@@ -96,7 +98,7 @@ module.exports = {
         };
         databasefunction.passwordreset(obj).then((data) => {
                 if (data == null || data.length <= 0) res.status(404).send({ 'status': 0, 'err': 'User Not Found' })
-                else res.status(200).send({ 'status': 1, 'data': 'Password Successfully Set' })
+                else res.status(200).send({ 'status': 1, 'data': 'Password Successfully reset. Kindly login to access you account.' })
             })
             .catch(err => res.status(500).send({ 'status': 0, 'err': 'Internal Server Error' }))
     },

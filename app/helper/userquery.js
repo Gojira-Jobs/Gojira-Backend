@@ -52,7 +52,8 @@ module.exports = {
 
     useremailverify: (obj) => {
         return new Promise((resolve, reject) => {
-            User.findOneAndUpdate({ 'email': obj.email, 'token': obj.token }, { $set: { 'verify': 'Yes', 'token': obj.ntoken } }, (err, data) => {
+            console.log("Here to set token and verified status>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            User.findOneAndUpdate({ 'email': obj.email, 'token': obj.token }, { $set: { 'verified': true, 'token': obj.ntoken } }, {new: true}, (err, data) => {
                 console.log('Data: ', data);
                 if (err) reject(err);
                 else resolve(data);
@@ -97,7 +98,7 @@ module.exports = {
     passwordchange: (obj) => {
         return new Promise((resolve, reject) => {
             console.log('In Change Password:', obj.email, obj.oldpass, obj.newpass);
-            User.findOneAndUpdate({ 'email': obj.email, 'password': obj.oldpass }, { $set: { 'password': obj.newpass } }, (err, data) => {
+            User.findOneAndUpdate({ 'email': obj.email, 'password': obj.oldPass }, { $set: { 'password': obj.newPass } },{new : true}, (err, data) => {
                 console.log('Data: ', data);
                 if (err) reject(err);
                 else resolve(data);

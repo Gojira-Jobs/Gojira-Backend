@@ -52,7 +52,7 @@ router.post('/areset', authfun.admin, admin.reset)
 
 // admin and user common route
 router.post('/login', headercheck.headerchecking, common.login)
-router.post('/forget', headercheck.headerchecking, common.forget)
+router.post('/forgotpass', headercheck.headerchecking, common.forget)
 router.post('/matchpass', common.passwordchange)
 
 //postroute

@@ -34,7 +34,10 @@ module.exports = {
     },
 
     admin: (req, res, next) => {
-        console.log('Inside Admin Authentication Function');
+
+        console.log('Inside Admin Authentication Function>>>>>>>>>>>>>>>>>>');
+        console.log(req.headers);
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         if (!req.headers.token) res.status(401).send({ 'status': false, 'err': 'unauthorized user' });
         else if (!req.headers.email) res.status(401).send({ 'status': false, 'err': 'unauthorized user' });
         else if (req.headers.token == 'No') res.status(401).send({ 'status': 0, 'err': 'Unauthorized User' })
