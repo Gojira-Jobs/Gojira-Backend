@@ -97,7 +97,7 @@ module.exports = {
         };
         databasefunction.passwordreset(obj).then((data) => {
                 if (data == null || data.length <= 0) res.status(404).send({ 'status': 0, 'err': 'User Not Found' })
-                else res.status(200).send({ 'status': 1, 'data': 'Password Successfully Set' })
+                else res.status(200).send({ 'status': 1, 'data': 'Password Successfully reset. Kindly login to access you account.' })
             })
             .catch(err => res.status(500).send({ 'status': 0, 'err': 'Internal Server Error' }))
     },

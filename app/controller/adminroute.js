@@ -87,6 +87,7 @@ module.exports = {
     },
 
     reset: (req, res, next) => {
+        console.log(req.headers);
         let obj = {
             'email': req.headers.email,
             'token': "No",
@@ -94,7 +95,7 @@ module.exports = {
         };
         databasefunction.passwordreset(obj).then((data) => {
                 if (data == null || data.length <= 0) res.status(404).send({ 'status': 0, 'err': 'User Not found' })
-                else res.status(200).send({ 'status': 1, 'data': 'Password Successfully Set' })
+                else res.status(200).send({ 'status': 1, 'data': 'Password Successfully reset. Kindly login to access your account.' })
             })
             .catch(err => res.status(500).send({ 'status': 0, 'err': 'Internal Server Error' }))
     }

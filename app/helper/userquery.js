@@ -98,7 +98,7 @@ module.exports = {
     passwordchange: (obj) => {
         return new Promise((resolve, reject) => {
             console.log('In Change Password:', obj.email, obj.oldpass, obj.newpass);
-            User.findOneAndUpdate({ 'email': obj.email, 'password': obj.oldpass }, { $set: { 'password': obj.newpass } }, (err, data) => {
+            User.findOneAndUpdate({ 'email': obj.email, 'password': obj.oldPass }, { $set: { 'password': obj.newPass } },{new : true}, (err, data) => {
                 console.log('Data: ', data);
                 if (err) reject(err);
                 else resolve(data);

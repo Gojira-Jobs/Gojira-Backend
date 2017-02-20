@@ -8,10 +8,20 @@ let admin = require('../controller/adminroute');
 let user = require('../controller/userroute');
 let common = require('../controller/commonroute');
 let postroute = require('../controller/postroute');
+let passport = require('passport');
+let LocalPassport = require('./../services/passportauth');
+let ppConfig = require('./../config');
+(new LocalPassport(passport, ppConfig)).initConfig();
 
 router.use(bodyparser());
 
 //userroute
+
+router.get('/googleauth', passport.authenticate('google', { scope: ['profile', 'email'] }))
+router.get('/auth/google/callback', passport.authenticate('google', function(req, res) {
+    console.log('Google Auth Done');
+}));
+
 router.post('/register', headercheck.headerchecking, user.registration)
 router.post('/verified', user.verifyaccount)
 router.post('/resendlink', user.resendlink)
