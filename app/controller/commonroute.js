@@ -39,7 +39,7 @@ module.exports = {
             if (req.body.isHr == true) {
                 forget.adminforget({ 'email': req.body.email }).then((solve) => {
                     if (solve.ok == 1) {
-                        let url = 'http://localhost:4200/forgotpass?email=' + req.body.email.trim().toLowerCase() + '&token=' + solve.token+'&H='+true;
+                        let url = 'http://f6a75801.ngrok.io/forgotpass?email=' + req.body.email.trim().toLowerCase() + '&token=' + solve.token+'&H='+true;
                         let senddata = {
                             'email': req.body.email,
                             'subject': 'Password Reset Link',

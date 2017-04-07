@@ -48,17 +48,18 @@ module.exports={
     }),
 
     searchForHr: (mailId)=>{
-    return new Promise((resolve,reject)=>{
-        hrTable.findOne({email:mailId},(err,doc)=>{
-            if(err) {
-                console.log("doc:",err);
-            reject(err);}
-            else{
-                resolve(doc);
-            } 
-        })
-    });
-},
+        return new Promise((resolve,reject)=>{
+            hrTable.findOne({email:mailId},(err,doc)=>{
+                if(err) {
+                    console.log("doc:",err);
+                reject(err);
+                }
+                else{
+                    resolve(doc);
+                } 
+            })
+        });
+    },
 
     getPostedJobs:(mailId)=>{
         return new Promise((resolve,reject)=>{

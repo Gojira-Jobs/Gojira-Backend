@@ -1,4 +1,4 @@
 module.exports= {
     'secret':'wearebuildinggojiraportal',
-    'url':'mongodb://localhost:27017/hr_portal_db'
+    'url':'mongodb://gojira123:gojirajobs@ds153730.mlab.com:53730/gojira_db'
 }

@@ -6,7 +6,10 @@ module.exports = {
         let getData = postPromises.getPosts();
         getData.then((docs) => {
                 if (!docs) res.status(errors.ACCEPTED.code).json({ status: 0, jobs: docs, msg: errors.ACCEPTED.msg });
-                else res.status(errors.ACCEPTED.code).json({ status: 1, jobs: docs, msg: errors.ACCEPTED.msg });
+                else {
+                    res.setHeader("Cache-Control",'public, max-age=31557600');
+                  res.status(errors.ACCEPTED.code).json({ status: 1, jobs: docs, msg: errors.ACCEPTED.msg });  
+                } 
             })
             .catch((err) => res.status(errors.INTERNAL.code).json({ error: errors.INTERNAL.msg }))
     },
