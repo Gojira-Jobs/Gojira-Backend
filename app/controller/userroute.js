@@ -14,7 +14,7 @@ module.exports = {
                     obj.token = tokenfun.gettoken(obj.email);
                     obj.verify = 'No';
                     databasefunction.insertdata(obj).then((solv) => {
-                        let activate_url = 'https://gojirajobsapi.herokuapp.com/api/emailverify?email=' + obj.email + '&token=' + obj.token;
+                        let activate_url = 'http://localhost:4200/verifyemail?email=' + obj.email + '&token=' + obj.token;
                         let maildata = {
                             'email': obj.email,
                             'subject': 'Gojira Account Activation Link',
@@ -62,7 +62,7 @@ module.exports = {
                     else {
                         obj.token = tokenfun.gettoken(obj.email);
                         databasefunction.usertokenupdate(obj).then(data => {
-                                let activate_url = 'https://gojirajobsapi.herokuapp.com/api/verifyemail?email=' + obj.email + '&token=' + obj.token;
+                                let activate_url = 'http://localhost:4200/verifyemail?email=' + obj.email + '&token=' + obj.token;
                                 let maildata = {
                                     'email': obj.email,
                                     'subject': 'Gojira Account Activation Link',
