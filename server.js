@@ -53,5 +53,5 @@ app.get('/setup', (req, res, next) => {
 
 app.use('/api', root);
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
 console.log("Server is Running...");
