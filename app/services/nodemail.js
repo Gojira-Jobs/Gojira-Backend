@@ -1,4 +1,4 @@
-const nodemailer = require('@nodemailer/pro');
+const nodemailer = require('nodemailer');
 
 module.exports = function(obj){
     return new Promise((resolve,reject)=>{
