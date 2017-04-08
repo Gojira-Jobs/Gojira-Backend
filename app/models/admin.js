@@ -38,5 +38,5 @@ let postSchema = new Schema({
 });
 module.exports = {
     hrSchema:mongoose.model('admin_tables',hrSchema),
-    postSchema:mongoose.model('post',postSchema)
+    postSchema:mongoose.model('posts',postSchema)
 };
